@@ -33,6 +33,6 @@ d3.csv('universities.csv').then(function (data) {
   });
 
   // Pass the processed data to the respective functions
-  CreateGeoMap(reducedDataGMap);
+  CreateGeoMap(data);
   GetParallelPlot(reducedDataPPlot);
 });

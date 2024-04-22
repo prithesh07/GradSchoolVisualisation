@@ -139,7 +139,6 @@ function GetParallelPlot(data) {
             }
 
             function brushEnd(attribute) {
-                console.log(attribute, activeBrushes)
                 updateBrushing();
             }
 
@@ -263,8 +262,6 @@ function GetParallelPlot(data) {
                 })
             );
         });
-    console.log(varPosList);
-
 }
 
 function reorderData(data, varPosList) {

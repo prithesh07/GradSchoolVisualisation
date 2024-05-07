@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Exploring Universities Globally: Factors Influencing Student Choice</title>
+  <meta name="viewport" content="initial-scale=1" />
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
+</head>
+
+<body>
+  <h5 style="margin-top:10px; text-align: center; color: white; font-family: 'Inter', sans-serif;">Exploring Universities Globally: Factors Influencing Student Choice</h5>
+  </br>
+  <div style="display: flex; justify-content: space-around;">   
+    <div style="width: 18%; border: 2px solid #ccc; padding: 10px; border-radius: 10px;">
+      <div id="uniname" style="text-align: center; font-size: small; color: yellow"></div></br>
+      <div class="skill" style="margin-left: 30px">
+        <div class="outer">
+          <div class="inner">
+            <div id="number"></div>
+          </div>
+        </div>
+        <div id="circleSvg"></div>
+        <h5 style="margin-top:10px; text-align: center;  color: yellow; font-size: small">University Overall Score</h6>  
+          <div style="display: flex; align-items: center; margin-top: 10px;">
+            <div id="rank" style="margin-right: 10px;"></div>
+            <div id="text-info2" style="color: white; font-size:medium; margin-left: 20px;"></div><div style="color: white; font-size:medium; margin-left: 50px;" id="text-info1"></div>
+        </div>
+        <text style="margin-left: 20px; font-size: small">2024 Rank &nbsp&nbsp&nbsp 2023 Rank </text>
+      </div>
+    </div>
+    
+    <div id="map" style="width: 50%; border: 2px solid #ccc; padding: 10px; border-radius: 10px;"></div>  <!-- Existing map div -->
+    <div id="bar2" style="width: 27%; border: 2px solid #ccc; padding: 10px; border-radius: 10px;"> <!-- New parallel div -->
+      Line chart to compare two or more universities
+    </div>
+  </div>
+  <div style="margin-top:10px; display: flex; justify-content: space-around;">
+    <svg id="parallelplot-svg" style="width:60%; border: 2px solid #ccc; padding: 10px; border-radius: 10px;"></svg>
+    <div id="histogram" style="width: 35%; border: 2px solid #ccc; padding: 10px; border-radius: 10px;"> <!-- New parallel div -->
+      Radar Chart
+    </div>
+  </div>
+
+  <script src="https://d3js.org/d3.v5.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <script src="{{ url_for('static', filename='geomap.js') }}"></script>
+  <script src="{{ url_for('static', filename='uni_overview.js') }}"></script>
+  <script src="{{ url_for('static', filename='linechart.js') }}"></script>
+  <script src="{{ url_for('static', filename='radar.js') }}"></script>
+  <script src="{{ url_for('static', filename='parallelplot.js') }}"></script>
+  <script src="{{ url_for('static', filename='index.js') }}"></script>
+  <script>
+    var universitiesCsvUrl = "{{ url_for('static', filename='sampled_universities.csv') }}";  // Correctly resolves the path
+    var lineChartUni;
+    var radarUni;
+    d3.csv(universitiesCsvUrl).then(function(data) {
+      GeneratePlots(data)
+    });
+  </script>
+</body>
+
+</html>

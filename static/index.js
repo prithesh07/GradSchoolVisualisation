@@ -8,13 +8,13 @@ function GeneratePlots(data)
 
     // Extract only the columns specified in `colsPPlot`
     colsPPlot.forEach(dim => {
-      const value = parseFloat(row[dim]);  // Convert to float
-      reducedRow[dim] = isNaN(value) ? null : value;  // Handle NaN
+      const value = parseFloat(row[dim]);
+      reducedRow[dim] = value;  // Handle NaN
     });
-
+    
     return reducedRow;
   });
-  
+
   lineChartUni = [data[0].InstitutionName]
   radarUni = [data[0].Country]
 

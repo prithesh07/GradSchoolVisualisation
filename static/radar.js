@@ -1,4 +1,5 @@
 function drawRadar(data)
 {
-    console.log("drawing radar chart for countries", radarUni)
+    const filteredData = data.filter(row => radarUni.includes(row.Country));
+    console.log("drawing radar chart for countries", filteredData)
 }

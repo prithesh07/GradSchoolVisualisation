@@ -17,7 +17,7 @@ function GetParallelPlot(fullData, data) {
         .append("style")
         .text("path.hidden { stroke-opacity: 0;}");
 
-    const x = d3.scalePoint().range([0, width]).domain(dimensions);
+    const x = d3.scalePoint().range([0, width+2]).domain(dimensions);
     const y = {};
 
     const varPosList = [];
@@ -103,6 +103,7 @@ function GetParallelPlot(fullData, data) {
             function updateBrushing() {
                 svg.selectAll("path").classed("hidden", function (d) {
                     flag = false;
+                    count = 0;
                     if (d != null) {
                         dimensions.forEach(attribute => {
                             if (activeBrushes.get(attribute)) {
@@ -116,12 +117,14 @@ function GetParallelPlot(fullData, data) {
                                 scaledMinValue = minValue + (small * brushExtent1);
                                 scaledMaxValue = minValue + (small * brushExtent2);
 
-                                if (d[attribute] <= scaledMaxValue || d[attribute] >= scaledMinValue) {
+                                if (d[attribute] < scaledMaxValue || d[attribute] > scaledMinValue) {
                                     flag = true;
+                                    count +=1;
                                 }
                             }
                         });
                     }
+                    console.log("Count ",count)
                     return flag;
                 });
             }
